@@ -44,6 +44,7 @@ jobs:
           python3 --version
       - name: Build package
         run: ./scripts/lean-low-priority lake build
+        working-directory: project_template
 
   blueprint-tests:
     name: Blueprint Tests
