@@ -3,12 +3,12 @@ open Lake DSL
 
 require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint"@"v4.31.0"
 
-package ProjectTemplate where
+package DiophantineLean where
   precompileModules := false
   leanOptions := #[⟨`experimental.module, true⟩]
 
 @[default_target]
-lean_lib ProjectTemplate where
+lean_lib DiophantineLean where
 
 lean_exe «blueprint-gen» where
-  root := `ProjectTemplateMain
+  root := `DiophantineLeanMain

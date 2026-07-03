@@ -26,14 +26,14 @@ project_template/
   .gitignore
   lakefile.lean
   lean-toolchain
-  ProjectTemplate.lean
-  ProjectTemplate/
+  DiophantineLean.lean
+  DiophantineLean/
     Blueprint.lean
     Chapters/
       Addition.lean
       Multiplication.lean
       Collatz.lean
-  ProjectTemplateMain.lean
+  DiophantineLeanMain.lean
   source/
     addition-source.pdf
   scripts/
@@ -42,12 +42,12 @@ project_template/
 
 The important files are:
 
-- `ProjectTemplate/Chapters/Addition.lean`: the first chapter
-- `ProjectTemplate/Chapters/Multiplication.lean`: the second chapter
-- `ProjectTemplate/Chapters/Collatz.lean`: a separate exploratory chapter with
+- `DiophantineLean/Chapters/Addition.lean`: the first chapter
+- `DiophantineLean/Chapters/Multiplication.lean`: the second chapter
+- `DiophantineLean/Chapters/Collatz.lean`: a separate exploratory chapter with
   the intentionally unfinished conjecture
-- `ProjectTemplate/Blueprint.lean`: the Blueprint top-level file
-- `ProjectTemplateMain.lean`: the rendering entry point
+- `DiophantineLean/Blueprint.lean`: the Blueprint top-level file
+- `DiophantineLeanMain.lean`: the rendering entry point
 - `source/addition-source.pdf`: a tiny committed source-document fixture used
   by the addition chapter's source chip and preview
 - `lakefile.lean`: the package definition and optional `blueprint-gen`
@@ -75,7 +75,7 @@ The important files are:
 ## Recommended workflow
 
 1. Copy this folder into a new repository.
-2. Rename `ProjectTemplate` to your project name.
+2. Rename `DiophantineLean` to your project name.
 3. Keep the generator entry point and top-level file structure.
 4. Replace the addition, multiplication, and Collatz chapters with your own
    content.
@@ -93,8 +93,8 @@ that the included GitHub Pages workflow runs. The script builds the Lean library
 artifacts and then runs the generator file directly:
 
 ```bash
-lake build ProjectTemplate
-lake lean ProjectTemplateMain.lean -- --run ProjectTemplateMain.lean --output _out/site
+lake build DiophantineLean
+lake lean DiophantineLeanMain.lean -- --run DiophantineLeanMain.lean --output _out/site
 ```
 
 This avoids compiling a generator executable and its transitive native artifacts,
