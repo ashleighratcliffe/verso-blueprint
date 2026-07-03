@@ -9,6 +9,19 @@ require verso from git "https://github.com/leanprover/verso"@"v4.31.0"
 require «verso-slides» from git "https://github.com/ejgallego/verso-slides.git"@"e6a5d54228eb21fd86b041ab786d2d03bfb46685"
 require proofwidgets from git "https://github.com/leanprover-community/ProofWidgets4"@"v0.0.98"
 
+require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint"@"v4.31.0"
+
+package DiophantineLean where
+  precompileModules := false
+  leanOptions := #[⟨`experimental.module, true⟩]
+
+@[default_target]
+lean_lib DiophantineLean where
+
+lean_exe «blueprint-gen» where
+  root := `DiophantineLeanMain
+
+
 package VersoBlueprint where
   precompileModules := false
   leanOptions := #[⟨`experimental.module, true⟩]

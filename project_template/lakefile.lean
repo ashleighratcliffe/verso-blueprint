@@ -1,6 +1,7 @@
 import Lake
 open Lake DSL
 
+require Mathlib from git "https://github.com/leanprover-community/mathlib4" @ "v4.31.0"
 require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint"@"v4.31.0"
 
 package DiophantineLean where
