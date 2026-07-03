@@ -4,12 +4,10 @@ open Lake DSL
 -- While the split is in progress, the extracted blueprint package depends on
 -- the parent repo root, which remains a checkout of Verso.
 -- require verso from "../verso"
-require verso from git "https://github.com/leanprover/verso"@"v4.31.0"
--- Temporary v4.31-compatible pin to leanprover/verso-slides#59 for Config.extraHead.
-require «verso-slides» from git "https://github.com/ejgallego/verso-slides.git"@"e6a5d54228eb21fd86b041ab786d2d03bfb46685"
-require proofwidgets from git "https://github.com/leanprover-community/ProofWidgets4"@"v0.0.98"
 
+-- Temporary v4.31-compatible pin to leanprover/verso-slides#59 for Config.extraHead.
 require VersoBlueprint from git "https://github.com/leanprover/verso-blueprint"@"v4.31.0"
+require verso from git "https://github.com/leanprover/verso"@"v4.31.0"
 
 package DiophantineLean where
   precompileModules := false
@@ -20,73 +18,3 @@ lean_lib DiophantineLean where
 
 lean_exe «blueprint-gen» where
   root := `DiophantineLeanMain
-
-
-package VersoBlueprint where
-  precompileModules := false
-  leanOptions := #[⟨`experimental.module, true⟩]
-
--- Blueprint core library.
-@[default_target]
-lean_lib VersoBlueprint where
-  srcDir := "src"
-  roots := #[`VersoBlueprint]
-
-@[default_target]
-lean_exe «vbp» where
-  root := `VersoBlueprint.VbpMain
-  srcDir := "src"
-  supportInterpreter := true
-
-@[default_target, test_driver]
-lean_lib VersoBlueprintTests where
-  srcDir := "tests"
-  roots := #[
-    `VersoBlueprintTests.Blueprint.Support,
-    `VersoBlueprintTests.BlueprintAssets,
-    `VersoBlueprintTests.BlueprintAutoDeps,
-    `VersoBlueprintTests.BlueprintAttribute,
-    `VersoBlueprintTests.BlueprintCodeRenderMatrix,
-    `VersoBlueprintTests.BlueprintImportedDuplicates.Direct,
-    `VersoBlueprintTests.BlueprintImportedDuplicates.ProviderA,
-    `VersoBlueprintTests.BlueprintImportedDuplicates.ProviderB,
-    `VersoBlueprintTests.BlueprintImportedDuplicates.Reexport,
-    `VersoBlueprintTests.BlueprintImportedDuplicates.Transitive,
-    `VersoBlueprintTests.BlueprintExternalHeadingStatus,
-    `VersoBlueprintTests.BlueprintGraft,
-    `VersoBlueprintTests.BlueprintGraph,
-    `VersoBlueprintTests.BlueprintHeaderExtras,
-    `VersoBlueprintTests.BlueprintInformal,
-    `VersoBlueprintTests.BlueprintInlinePrecision,
-    `VersoBlueprintTests.BlueprintLinkHover,
-    `VersoBlueprintTests.BlueprintMainWrapper,
-    `VersoBlueprintTests.BlueprintMathLint,
-    `VersoBlueprintTests.BlueprintMetadataPanel,
-    `VersoBlueprintTests.BlueprintNumbering,
-    `VersoBlueprintTests.BlueprintSlides,
-    `VersoBlueprintTests.BlueprintPreviewPanels,
-    `VersoBlueprintTests.BlueprintPreviewSchema,
-    `VersoBlueprintTests.BlueprintPreviewSource,
-    `VersoBlueprintTests.BlueprintPreviewWiring,
-    `VersoBlueprintTests.BlueprintSource,
-    `VersoBlueprintTests.BlueprintRustCode,
-    `VersoBlueprintTests.BlueprintSummaryLinks,
-    `VersoBlueprintTests.BlueprintSummaryStatus,
-    `VersoBlueprintTests.BlueprintTexMacros,
-    `VersoBlueprintTests.BlueprintExternalMarkup,
-    `VersoBlueprintTests.ExternalDeclRender,
-    `VersoBlueprintTests.RuntimeCache,
-    `VersoBlueprintTests.TestBlueprintRegistryMeta,
-    `VersoBlueprintTests.TestBlueprintRegistryChecks,
-    `VersoBlueprintTests.TestBlueprintRegistryCoverage,
-    `VersoBlueprintTests.Vbp
-  ]
-
-lean_lib VersoBlueprintTestDocs where
-  srcDir := "tests"
-  roots := #[`VersoBlueprintTests.TestBlueprintRegistry]
-
-lean_exe «blueprint-test-docs» where
-  root := `BlueprintTestDocsMain
-  srcDir := "tests"
-  supportInterpreter := true
