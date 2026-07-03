@@ -45,7 +45,7 @@ jobs:
       - name: Build package
         run: |
           lake build
-        working-directory: project_template
+        working-directory: versoblueprintdio
 
   blueprint-tests:
     name: Blueprint Tests
