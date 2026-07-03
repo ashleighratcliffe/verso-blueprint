@@ -44,7 +44,6 @@ jobs:
           python3 --version
       - name: Build package
         run: |
-          cd project_template
           lake build
         working-directory: project_template
 
